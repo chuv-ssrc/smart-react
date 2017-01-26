@@ -10,6 +10,8 @@
 
 import React from 'react';
 import Link from '../Link';
+import LoginButton from '../Login/LoginButton';
+
 
 class Navigation extends React.Component {
 
@@ -24,6 +26,7 @@ class Navigation extends React.Component {
   render() {
     return (
       <nav className="mdl-navigation" ref={node => (this.root = node)}>
+        <LoginButton/>
         <Link className="mdl-navigation__link" to="/">Home</Link>
         <Link className="mdl-navigation__link" to="/about">About</Link>
       </nav>

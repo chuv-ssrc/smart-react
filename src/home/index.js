@@ -11,31 +11,48 @@
 import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
 import s from './styles.css';
-import { title, html } from './index.md';
+import LogoutButton from '../../components/Login/LogoutButton';
+import LaunchButton from '../../components/Login/LaunchButton';
+import { Button } from 'react-mdl';
+
 
 class HomePage extends React.Component {
-
-  static propTypes = {
-    articles: PropTypes.array.isRequired,
-  };
+  constructor() {
+    super();
+    this.state = {
+      ready: false,
+      patients: [],
+    };
+  }
 
   componentDidMount() {
-    document.title = title;
+    let _this = this;
+    window.FHIR.oauth2.ready(function(smart){
+      _this.setState({ready: true});
+    });
+  }
+
+  tryit() {
+    let _this = this;
+    window.FHIR.oauth2.ready(function(smart){
+      let r = smart.api.search({type: 'Patient'});
+      r.then((res) => {
+        _this.setState({patients: res.data.entry.map(r => r.resource.name[0].family)})
+      });
+    });
   }
 
   render() {
+    let patients = this.state.patients.map((p,i) => <li key={i}>{p}</li>);
     return (
       <Layout className={s.content}>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-        <h4>Articles</h4>
+        <LogoutButton auth={this.props.auth}/>
+        <h1>HOME PAGE (FHIR ready: {this.state.ready ? 1 : 0})</h1>
+        <LaunchButton/>
+        <Button onClick={this.tryit.bind(this)}>Try it</Button>
         <ul>
-          {this.props.articles.map((article, i) =>
-            <li key={i}><a href={article.url}>{article.title}</a> by {article.author}</li>
-          )}
+          {patients}
         </ul>
-        <p>
-          <br /><br />
-        </p>
       </Layout>
     );
   }

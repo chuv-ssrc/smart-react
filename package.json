@@ -7,15 +7,19 @@
     "npm": ">=3.8"
   },
   "dependencies": {
+    "auth0-lock": "^10.10.2",
     "babel-polyfill": "^6.22.0",
     "classnames": "^2.2.5",
     "fastclick": "^1.0.6",
+    "fhirclient": "^0.1.9",
     "history": "^4.5.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-mdl": "^1.9.0",
     "react-redux": "^5.0.2",
+    "react-router": "^3.0.2",
     "redux": "^3.6.0",
+    "redux-logger": "^2.7.4",
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {

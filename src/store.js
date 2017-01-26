@@ -8,7 +8,9 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import createLogger from 'redux-logger';
+const logger = createLogger({collapsed: true});
 
 // Centralized application state
 // For more information visit http://redux.js.org/
@@ -19,9 +21,19 @@ const store = createStore((state = initialState, action) => {
   switch (action.type) {
     case 'COUNT':
       return { ...state, count: (state.count) + 1 };
+
+    case 'SHOW_LOGIN_SCREEN':
+      return { ...state, showLoginScreen: true };
+
+    case 'HIDE_LOGIN_SCREEN':
+      return { ...state, showLoginScreen: false };
+
+    case 'INIT_FHIR':
+      return { ...state, FHIR: action.fhir };
+
     default:
       return state;
   }
-});
+}, applyMiddleware(logger));
 
 export default store;
