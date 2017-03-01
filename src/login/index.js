@@ -19,7 +19,7 @@ class LoginPage extends React.Component {
   render() {
     return (
       <Layout className={s.content}>
-        <h1>PLEASE LOG IN</h1>
+        <h2>Please log in</h2>
         <LoginButton auth={this.props.auth}/>
       </Layout>
     );

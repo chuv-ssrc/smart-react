@@ -46,8 +46,9 @@ class HomePage extends React.Component {
     let patients = this.state.patients.map((p,i) => <li key={i}>{p}</li>);
     return (
       <Layout className={s.content}>
-        <LogoutButton auth={this.props.auth}/>
-        <h1>HOME PAGE (FHIR ready: {this.state.ready ? 1 : 0})</h1>
+        <div style={{marginTop: "15px"}}/>
+        <LogoutButton auth={this.props.auth} />
+        <h2>Home page (FHIR ready: {this.state.ready ? 1 : 0})</h2>
         <LaunchButton/>
         <Button onClick={this.tryit.bind(this)}>Try it</Button>
         <ul>
